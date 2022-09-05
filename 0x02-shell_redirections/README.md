@@ -19,4 +19,4 @@ This script displays the last 10 lines of the file /etc/passwd
 This script displays the first 10 lines of a file.
 
 ## Task 6: Line #2
-This script displays only the third line of the file /etc/passwd
+This script displays only the third line of the file iacta (in the working directoty)
