@@ -38,3 +38,6 @@ This script count the number of directories and sub-directories in the current d
 
 ## Task 12: What's new
 This script displays the 10 newest files in the current directory
+
+## Task 13: Being unique is better than being perfect
+This script takes a list of words as input and prints only works that appear exactly once.
