@@ -14,3 +14,6 @@ This script displays the contents of two files /etc/passwd and /etc/hosts
 
 ## Task 4: Last lines of a file
 This script displays the last 10 lines of the file /etc/passwd
+
+## Task 5: I'd prefer the first ones actually
+This script displays the first 10 lines of a file.
