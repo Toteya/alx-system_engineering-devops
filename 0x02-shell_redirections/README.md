@@ -33,7 +33,7 @@ This script duplicats the content of the last line of the file iacta.
 ## Task 10: No more javascript
 This script deletes all regular files ending with .js
 
-## Task 11: Don't just cout your directories, make your directories count
+## Task 11: Don't just count your directories, make your directories count
 This script count the number of directories and sub-directories in the current directory
 
 ## Task 12: What's new
