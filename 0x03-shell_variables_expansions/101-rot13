@@ -1,2 +1,2 @@
 #!/bin/bash
-tr [a-z] [nopqrstuvwxyzabcdefghijklm] | tr [A-Z] [NOPQRSTUVWXYZABCDEFGHIJKLM]
+tr acdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ npqrstuvwxyzacdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM | tr bo ob
