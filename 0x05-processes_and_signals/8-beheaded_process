@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script attempts to kills a process of the name 
+# "./7-highlander
+
+pkill -SIGKILL -f ./7-highlander
