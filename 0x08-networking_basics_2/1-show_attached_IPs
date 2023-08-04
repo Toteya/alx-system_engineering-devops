@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# This script prints all the active IPv4 IPs on the machine
+
+netstat -l | grep -E '[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}' | cut -d ':' -f 1 activeIPs.txt | rev | cut -d ' ' -f 1 | rev
