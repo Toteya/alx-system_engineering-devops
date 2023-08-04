@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
-# This script kills a process of the name "./4-to_infinity_and_beyond"
+# This script attempts to kills a process of the name 
+# "./7-highlander
 
 pkill -f ./7-highlander

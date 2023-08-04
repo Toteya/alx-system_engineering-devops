@@ -21,7 +21,7 @@
 
 * -6. Write a Bash script that stops 4-to_infinity_and_beyond process.
 
-* -7. Write a Bash script that displays:
+* -7. Write a Bash script that ignores a SIGTERM signal.
 
 * -8. Write a Bash script that kills the process 7-highlander.
 
