@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script installs NGINX web server on a server
+
+apt-get -y update
+apt-get -y install nginx
