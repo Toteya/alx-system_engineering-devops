@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# This script creates a RSA key pair and stores it in the file school
+
+ssh-keygen -P 'betty' -f school -b 4096
