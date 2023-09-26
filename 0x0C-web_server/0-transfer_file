@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# This script copies a file from a client (local) to a server
+FILE_PATH=$1
+IP=$2
+USERNAME=$3
+SSH_KEY_PATH=$4
+TARGET="$USERNAME@$IP:~/"
+if [[ $# -lt 3 ]]
+then
+	echo 'Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY'
+else
+	scp -i "$SSH_KEY_PATH" "$FILE_PATH" "$TARGET"
+fi
