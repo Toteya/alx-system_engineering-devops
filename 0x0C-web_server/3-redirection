@@ -3,6 +3,6 @@
 # to another page
 
 NEW_STRING="server_name http[s*]://redirect_me.*/;"
-sed -i "/server_name.*;/c $NEW_STRING" default
-sed -i "/server_name.*;/a rewrite ^/(.*)$ http://nyandi.tech/$1 permanent;" default
+sed -i "/server_name.*;/c $NEW_STRING" /etc/nginx/sites-available/default
+sed -i "/server_name.*;/a rewrite ^/(.*)$ http://nyandi.tech/$1 permanent;" /etc/nginx/sites-available/default
 service nginx restart
