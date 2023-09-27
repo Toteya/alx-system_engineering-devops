@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# This script configures a new machine to have a custom 404 page
-
+# This script customizes the 404 page of a new machine
 LINE1="error_page 404 /custom_404.html"
 LINE2="location = /custom_404.html {"
 LINE3="root /usr/share/nginx/html;"
 LINE4="internal;"
-LINE5="}"
 echo "Ceci n'est pas une page" > "/usr/share/nginx/html/custom_404.html"
-sed -i "/location.*{/i $LINE1\n$LINE2\n$LINE3\n$LINE4\n$LINE5" example
+sed -i "/location.*{/i $LINE1" /etc/nginx/sites-available/default
+sed -i "/location.*{/c $LINE2" /etc/nginx/sites-available/default
+sed -i "/location.*{/a $LINE3\n$LINE4" /etc/nginx/sites-available/default
 service nginx restart
