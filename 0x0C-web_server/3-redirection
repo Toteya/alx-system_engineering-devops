@@ -10,5 +10,5 @@ echo 'Hello World!' > /var/www/html/index.nginx-debian.html
 service nginx restart
 LINE1="	server_name http://nyandi.tech"
 LINE2="	rewrite ^/redirect_me/$ http://nyandi.tech permanent;"
-sed -i "s,^\sserver_name.*;,$LINE1\n$LINE2,"
+sed -i "s,^\sserver_name.*;,$LINE1\n$LINE2," /etc/nginx/sites-available/default
 service nginx restart
