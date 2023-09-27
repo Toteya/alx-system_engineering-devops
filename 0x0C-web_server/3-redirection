@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script configure the Nginx server so that /redirect_me is redirecting
+# to another page
+
+NEW_STRING="server_name http[s*]://redirect_me.*/;"
+sed -i "/server_name.*;/c $NEW_STRING" default
+sed -i "/server_name.*;/a rewrite ^/(.*)$ http://nyandi.tech/$1 permanent;" default
+service nginx restart
