@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# This script installs cURL and NGINX in a new machine
+
+sudo apt-get update
+sudo apt-get -y install curl
+sudo apt-get -y install nginx
+sudo service nginx start
