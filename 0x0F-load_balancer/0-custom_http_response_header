@@ -24,7 +24,7 @@ sed -i "s,^\slocation.*{,$STR1\n$STR2\n$STR3\n$STR4," /etc/nginx/sites-available
 service nginx restart
 
 # Congigure the HTTP response to contain header X-Served-By HOSTNAME
-LINE1="add_header X-Served-By $hostname;"
-sed -i "/^\sserver_name.*;/a$LINE1" example
-sed -i "s/^$LINE1;*/\t$LINE1/" example
+LINE1="add_header X-Served-By \$hostname;"
+sed -i "/^\sserver_name.*;/a$LINE1" /etc/nginx/sites-available/default
+sed -i "s/^$LINE1;*/\n\t$LINE1\n/" /etc/nginx/sites-available/default
 service nginx restart
