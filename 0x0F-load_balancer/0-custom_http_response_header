@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# This script configures a new Ubuntu server
+
+# Installs and configures Nginx web server
+apt-get -y update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+
+# Configure the root page
+echo 'Hello World!' > /var/www/html/index.nginx-debian.html 
+service nginx restart
+LINE1="	server_name http://nyandi.tech;"
+LINE2="	rewrite ^/redirect_me/$ http://nyandi.tech permanent;"
+sed -i "s,^\sserver_name.*;,$LINE1\n$LINE2," /etc/nginx/sites-available/default
+service nginx restart
+
+# Customizes the 404 error page
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
+STR1="	error_page 404 /custom_404.html;"
+STR2="	location = /custom_404.html {"
+STR3="		root /usr/share/nginx/html;"
+STR4="		internal;"
+sed -i "s,^\slocation.*{,$STR1\n$STR2\n$STR3\n$STR4," /etc/nginx/sites-available/default
+service nginx restart
+
+# Congigure the HTTP response to contain header X-Served-By HOSTNAME
+LINE1="add_header X-Served-By $hostname;"
+sed -i "/^\sserver_name.*;/a$LINE1" example
+sed -i "s/^$LINE1;*/\t$LINE1/" example
+service nginx restart
