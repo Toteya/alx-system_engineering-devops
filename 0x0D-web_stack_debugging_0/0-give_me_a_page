@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This script install Apache web server on a machine
 
 sudo apt-get update
