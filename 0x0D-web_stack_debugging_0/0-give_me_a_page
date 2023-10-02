@@ -1,0 +1,7 @@
+#!/bin/bash
+# This script install Apache web server on a machine
+
+sudo apt-get update
+sudo apt-get -y install apache2
+sudo /etc/init.d/apache2 start
+sudo /etc/init.d/apache2 restart
