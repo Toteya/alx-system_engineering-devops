@@ -2,7 +2,7 @@
 
 package {'nginx':
   ensure   => 'installed',
-  provider => 'apt-get',
+  provider => 'apt',
 }
 
 file { '/var/www/html/index.nginx-debian.html':
