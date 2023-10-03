@@ -1,14 +1,8 @@
-# This manifest configure a new server with Nginx
-# and creates a custom header X-Served-By HOSTNAME
+# This manifest configures a new server with Nginx webser
 
 package {'nginx':
   ensure   => 'installed',
   provider => 'apt',
-}
-
-exec {'ufw':
-  command => 'ufw allow \'Nginx HTTP\'',
-  path    => '/usr/sbin/',
 }
 
 file { '/var/www/html/index.nginx-debian.html':
@@ -23,10 +17,8 @@ $str = "server {
   \tindex index.html index.htm index.nginx-debian.html;\n
   \tserver_name nyandi.tech;\n
   \tadd_header X-Served-By \$hostname;\n
-  \trewrite ^/redirect_me/$ http://nyandi.tech permanent;\n
-  \tlocation = /custom_404.html {
-  \t\troot /usr/share/nginx/html;
-  \t\tinternal;"
+  \tlocation / {
+  \t\ttry_files \$uri \$uri/ =404;
   \t}
 }"
 
@@ -36,13 +28,8 @@ file {'/etc/nginx/sites-available/default':
   content => $str,
 }
 
-file {'/usr/share/nginx/html/custom_404.html':
-  ensure  => 'present',
-  content => 'Ceci n'est pas une page',
-}
-
 service {'nginx':
-  ensure  => 'running',
-  enable  => 'true',
+  ensure => 'running',
+  enable => 'true',
   restart => 'service nginx restart',
 }
