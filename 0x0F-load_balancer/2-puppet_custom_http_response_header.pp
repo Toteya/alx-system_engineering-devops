@@ -11,6 +11,11 @@ exec {'ufw':
   path    => '/usr/sbin/',
 }
 
+file { '/var/www/html/index.nginx-debian.html':
+  ensure  => 'present',
+  content => 'Hello World!',
+}
+
 $str = "server {
   \tlisten 80 default_server;
   \tlisten [::]:80 default_server;\n
