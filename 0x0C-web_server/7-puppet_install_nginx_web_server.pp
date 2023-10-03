@@ -1,8 +1,13 @@
-# This manifest configure a new server with Nginx webser
+# This manifest configures a new server with Nginx webser
 
 package {'nginx':
   ensure   => 'installed',
   provider => 'apt-get',
+}
+
+file { '/var/www/html/index.nginx-debian.html':
+  ensure  => 'present',
+  content => 'Hello World!',
 }
 
 $str = "server {
@@ -26,5 +31,5 @@ file {'/etc/nginx/sites-available/default':
 service {'nginx':
   ensure => 'running',
   enable => 'true',
-  restart
+  restart => 'service nginx restart',
 }
