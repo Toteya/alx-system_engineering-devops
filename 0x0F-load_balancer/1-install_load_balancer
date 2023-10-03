@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# This script configures a new HAproxy Load Balancer
+
+# Configure /etc/hosts file
+cp /etc/hosts /etc/hosts.bak
+LINE1="54.157.172.200 server_02"
+LINE2="34.204.61.59 server_02"
+sed -i "/^127.0.0.1.*/a$LINE1" /etc/hosts
+sed -i "/^$LINE1.*/a$LINE2" /etc/hosts
+
+# Install and Configure HAproxy
+apt-get -y update
+apt-get -y install haproxy
+cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
+LINE1="frontend http_front\n"
+LINE2="\tbind *:80\n"
+LINE3="\tstats uri /haproxy?stats\n"
+LINE4="\tdefault_backend http_back\n"
+LINE5="\nbackend http_back\n"
+LINE6="\tbalance roundrobin\n"
+LINE7="\tserver server_01 54.157.172.200:80 check\n"
+LINE8="\tserver server_02 34.204.61.59:80 check"
+echo -e "$LINE1$LINE2$LINE3$LINE4$LINE5$LINE6$LINE7$LINE8" > /etc/haproxy/haproxy.cfg
+
+# Installs and configure Nginx web server
+apt-get -y update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+
+cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
+LINE1="server {\n"
+LINE2="\tlisten 8080 default_server;\n"
+LINE3="\tlisten [::]:8080 default_server;\n\n"
+LINE4="\troot /var/www/html;\n\n"
+LINE5="\tindex index.html index.htm index.nginx-debian.html;\n\n"
+LINE6="\tserver_name nyandi.tech;\n\n"
+LINE7="\tlocation / {\n"
+LINE8="\t\tproxy_pass http://localhost:8080;\n"
+LINE9="\t}\n"
+LINE10="}"
+echo -e "$LINE1$LINE2$LINE3$LINE4$LINE5$LINE6$LINE7$LINE8$LINE9$LINE10" > /etc/nginx/sites-available/default
+
+service nginx start
+service nginx restart
+
+# Start HAproxy
+service haproxy start
+service haproxy restart
