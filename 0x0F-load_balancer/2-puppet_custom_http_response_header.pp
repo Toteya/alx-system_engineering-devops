@@ -1,4 +1,5 @@
 # This manifest configures a new server with Nginx webser
+# and add a custom http response header
 
 package {'nginx':
   ensure   => 'installed',
@@ -10,6 +11,11 @@ file { '/var/www/html/index.nginx-debian.html':
   content => 'Hello World!',
 }
 
+file { '/usr/share/nginx/html/custom_404.html':
+  ensure  => 'present',
+  content => 'Ceci n'est pas une page',
+}
+
 $str = "server {
   \tlisten 80 default_server;
   \tlisten [::]:80 default_server;\n
@@ -17,8 +23,11 @@ $str = "server {
   \tindex index.html index.htm index.nginx-debian.html;\n
   \tserver_name nyandi.tech;\n
   \tadd_header X-Served-By \$hostname;\n
-  \tlocation / {
-  \t\ttry_files \$uri \$uri/ =404;
+  \trewrite ^/redirect_me/$ http://nyandi.tech permanent;\n
+  \terror_page 404 /custom_404.html;
+  \tlocation = /custom_404.html {
+  \t\troot /usr/share/nginx/html;
+  \t\tinternal;
   \t}
 }"
 
