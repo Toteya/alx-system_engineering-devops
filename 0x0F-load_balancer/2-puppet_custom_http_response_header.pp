@@ -8,7 +8,7 @@ package {'nginx':
 
 file { '/var/www/html/index.nginx-debian.html':
   ensure  => 'present',
-  content => 'Hello World!\n',
+  content => "Hello World!\n",
 }
 
 file { '/usr/share/nginx/html/custom_404.html':
