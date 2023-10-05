@@ -5,10 +5,10 @@
 $str = "Host *
   \tPasswordAuthentication No
   \tIdentityFile ~/.ssh/school
-  \t${home}"
+"
 
 file { 'config':
   ensure  => 'present',
   content => $str,
-  path    => '/home/toteya/.ssh/config',
+  path    => '/home/ubuntu/.ssh/config',
 }
