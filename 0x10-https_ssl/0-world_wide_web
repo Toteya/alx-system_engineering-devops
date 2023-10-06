@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# This script displays information about subdomains
+
+get_subdomain_info () {
+	VAR=$(dig "$2.$1" | grep -A1 'ANSWER SECTION:')
+	VAR=$(echo "$VAR" | sed "s/\s\+/\n/g")
+
+	SUB_DOM=$2
+	RECORD_TYPE=$(echo "$VAR" | tail -n 2 | head -n 1)
+	DESTINATION=$(echo "$VAR" | tail -n 1)
+
+	echo "The subdomain $SUB_DOM is a $RECORD_TYPE record and points to $DESTINATION"
+}
+
+DOMAIN=$1
+SUBDOM=$2
+
+if [ -n "$2" ]; then
+	get_subdomain_info "$DOMAIN" "$SUBDOM"
+else
+	get_subdomain_info "$DOMAIN" "www"
+	get_subdomain_info "$DOMAIN" "lb-01"
+	get_subdomain_info "$DOMAIN" "web-01"
+	get_subdomain_info "$DOMAIN" "web-02"
+fi
+
+#echo "The subdomain [SUB_DOM is a [RECORD_TYPE] record and points to [DESTINATION]"
