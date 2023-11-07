@@ -42,6 +42,6 @@ def number_of_subscribers(subreddit=None):
     try:
         json_data = response.json().get('data').get('children')[0]
         num_subscribers = json_data.get('data').get('subreddit_subscribers')
-    except (json.decoder.JSONDecodeError, IndexError):
+    except Exception:
         num_subscribers = 0
     return num_subscribers
