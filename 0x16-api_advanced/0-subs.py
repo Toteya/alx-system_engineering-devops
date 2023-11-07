@@ -38,8 +38,10 @@ def number_of_subscribers(subreddit=None):
             'User-Agent': random.choice(user_agents),
             'Authorization': 'bearer {}'.format(token),
         }
-    query_string = {}
     response = requests.get(url, headers=headers)
-    json_data = response.json().get('data').get('children')[0]
-    num_subscribers = json_data.get('data').get('subreddit_subscribers')
+    try:
+        json_data = response.json().get('data').get('children')[0]
+        num_subscribers = json_data.get('data').get('subreddit_subscribers')
+    except (json.decoder.JSONDecodeError, IndexError):
+        num_subscribers = 0
     return num_subscribers
