@@ -2,8 +2,8 @@
 """module 0-subs"""
 import json
 import os
-import requests
 import random
+import requests
 
 user_agents = [
     'Toteya',
