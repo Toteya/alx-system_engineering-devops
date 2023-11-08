@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """module 0-subs"""
+import json
+import os
 import requests
 import random
-import os
-import json
 
 user_agents = [
     'Toteya',
