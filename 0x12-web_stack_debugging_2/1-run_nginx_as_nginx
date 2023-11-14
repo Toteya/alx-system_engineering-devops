@@ -3,4 +3,7 @@
 
 chown -R nginx:nginx /etc/nginx
 chmod u+r /etc/nginx/nginx.conf
-sudo -u nginx service restart nginx
+sed -i "/^\slisten.*;/s/80/8080/" /etc/nginx/sites-available/default
+kill -9 "$(pgrep apache2)"
+service apache2 stop
+sudo -u nginx service nginx restart
