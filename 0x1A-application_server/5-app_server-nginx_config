@@ -1,0 +1,49 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root /var/www/html;
+
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name nyandi.tech;
+	
+	add_header X-Served-By $hostname;
+
+	rewrite ^/redirect_me/$ http://nyandi.tech permanent;
+
+	location /2-hbnb/ {
+		root /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/2-hbnb/;
+	}
+	
+	location /hbnb_static/ {
+		alias /data/web_static/current/;
+	}
+
+	error_page 404 /custom_404.html;
+	location = /custom_404.html {
+		root /usr/share/nginx/html;
+		internal;
+	}
+
+	location /airbnb-onepage/ {
+		include proxy_params;
+		proxy_pass http://127.0.0.1:5000;
+	}
+
+	location /airbnb-dynamic/number_odd_or_even/ {
+		include proxy_params;
+		proxy_pass http://127.0.0.1:5001/number_odd_or_even/;
+	}
+
+	location /api/ {
+		include proxy_params;
+		proxy_pass http://127.0.0.1:5002;
+	}
+
+	location / {
+	 	include proxy_params;
+	 	proxy_pass http://127.0.0.1:5003;
+	}
+
+}
