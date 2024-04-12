@@ -44,7 +44,10 @@ def number_of_subscribers(subreddit):
             'Authorization': 'bearer {}'.format(access_token)
     }
     response = requests.get(url, headers=headers)
-    response_data = response.json()
+    try:
+        response_data = response.json()
+    except Exception:
+        return 0
 
     # print(response.text)
     # print(json.dumps(response_data, indent=4))
