@@ -56,4 +56,4 @@ def number_of_subscribers(subreddit):
     subs = data.get('subscribers')
     if subs is None:
         return 0
-    return subs
+    return int(subs)
