@@ -18,7 +18,6 @@ def top_ten(subreddit):
     Prints the titles of the first 10 hot posts listed for a given subreddit
     """
 
-
     access_token = "".join([
             "eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjpzS3dsMnlsV0VtMjVmcXhwTU40",
             "cWY4MXE2OWFFdWFyMnpLMUdhVGxjdWNZIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1",
